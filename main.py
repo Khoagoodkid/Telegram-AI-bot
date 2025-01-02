@@ -12,10 +12,6 @@ from utils.helper.get_stock_price import get_stock_price
 from utils.helper.get_symbol import get_symbol
 from pprint import pprint
 
-# s = get_symbol('Nvidia')
-# print(f"Nivida stock symbol is {s}")
-# pprint(get_stock_price(s))
-
 
 load_dotenv()
 
@@ -62,14 +58,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global chat_history
-    # print(chat_history)
+
     user_msg = update.message.text
 
     messages = []    
-    # messages = [{
-    #     "role": "system",
-    #     "content": "Act like a 18 year-old naughty boy who is sarcastic"
-    # }]
+
     
     messages = retrieveMsg()
     
@@ -80,7 +73,6 @@ async def query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     })
     response = get_completion(messages, tools)
     
-    # print(response.choices[0])
     
     if response.choices[0].message.content is None:
         while response.choices[0].finish_reason != 'stop':
@@ -139,7 +131,6 @@ async def query(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app = ApplicationBuilder().token(BOT_TOKEN).build()
     
 start_handler = CommandHandler('start', start)
-# query_handler = CommandHandler('query', query)
 
 msg_handler = MessageHandler(filters.TEXT , query)
 
