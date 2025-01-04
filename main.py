@@ -10,8 +10,13 @@ from utils.helper.get_current_weather import get_current_weather
 from utils.helper.view_website import view_website
 from utils.helper.get_stock_price import get_stock_price
 from utils.helper.get_symbol import get_symbol
+from utils.helper.get_personal_info import get_personal_info
 from pprint import pprint
 
+
+# Load the workbook
+
+# print(text)
 
 load_dotenv()
 
@@ -118,6 +123,22 @@ async def query(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     "name": tool_call.function.name,
                     "content": json.dumps({"result": result})
                 })
+            elif tool_call.function.name == "get_personal_info":
+                arguments = json.loads(tool_call.function.arguments)
+                result = get_personal_info(arguments.get('query'))
+                messages.append(response.choices[0].message)
+                print(result)
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": tool_call.id,
+                    "name": tool_call.function.name,
+                    "content": json.dumps({"result": result})
+                })
+                # messages.append({
+                #     "role": "system",
+                #     "content": "Choose out element that contains the name of person mentioned and return"
+                # })
+            
             response = get_completion(messages, tools)
         
      

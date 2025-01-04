@@ -78,4 +78,21 @@ tools = [
             }
         }
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_personal_info",
+            "description": "Retrieve personal data, e.g., Sơ yếu lí lịch của Hà Phạm Anh Khoa, Hà Phạm Anh Khoa là ai",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Name of specified person",
+                    },
+                },
+                "required": ["query"]
+            }
+        }
+    },
 ]
