@@ -67,9 +67,12 @@ async def query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_msg = update.message.text
 
     messages = []    
-
     
     messages = retrieveMsg()
+    messages.append({
+                    "role": "system",
+                    "content": "Talk with relatively sarcastic voice"
+    })
     
    
     messages.append({
